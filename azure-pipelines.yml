@@ -9,6 +9,15 @@ steps:
 - script: docker build . -t pipelines-python-docker-test
   displayName: 'Build docker test image'
 
+- script: docker create -ti --name pipelines-python-docker-test pipelines-python-docker-test
+  displayName: 'Create docker test container'
+
+- script: docker cp testcontainer:/usr/src/app/test-results.xml .
+  displayName: 'Copy test results from container'
+
+- script: docker rm -fv pipelines-python-docker-test
+  displayName: 'Remove the container'
+
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
