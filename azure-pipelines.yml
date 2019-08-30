@@ -9,13 +9,13 @@ steps:
 - script: docker build . -t pipelines-python-docker-test
   displayName: 'Build docker test image'
 
-- script: docker create -ti --name pipelines-python-docker-test pipelines-python-docker-test
+- script: docker create -ti --name pipelines-python-docker-test-container pipelines-python-docker-test
   displayName: 'Create docker test container'
 
-- script: docker cp testcontainer:/usr/src/app/test-results.xml .
+- script: docker cp pipelines-python-docker-test-container:/usr/src/app/test-results.xml .
   displayName: 'Copy test results from container'
 
-- script: docker rm -fv pipelines-python-docker-test
+- script: docker rm -fv pipelines-python-docker-test-container
   displayName: 'Remove the container'
 
 - script: |
