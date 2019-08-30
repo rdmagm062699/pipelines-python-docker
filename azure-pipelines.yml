@@ -18,10 +18,8 @@ steps:
 - script: docker rm -fv pipelines-python-docker-test-container
   displayName: 'Remove the container'
 
-- script: cat test-results.xml
-  displayName: 'View test results'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFiles: '**/test-results.xml'
+    testRunTitle: 'Publish test results'
