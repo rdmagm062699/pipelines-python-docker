@@ -1,3 +1,3 @@
 
 def my_method():
-    return 2
+    return 1
